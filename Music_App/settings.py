@@ -22,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l0lesqfes-th9re(+-yxn-zd#qhq&zy8eqz@03oskhw+b#(k1y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['ashmusic-ashkan79.fandogh.cloud']
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['https://musicash.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
