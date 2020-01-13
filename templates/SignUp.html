@@ -1,0 +1,80 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'music-player.png' %}">
+    <title>Login</title>
+    <style>
+        body {
+            background: rgb(160, 63, 251);
+            background: linear-gradient(63deg, rgba(160, 63, 251, 1) 0%, rgba(252, 70, 114, 1) 81%);
+        }
+
+       .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="card  m-5" style="max-width: 540px;">
+
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{% static 'Sign.jpg' %}" class="card-img" alt="..."/>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Sign Up</h5>
+                    <form method="POST" action="{% url 'SignUp' %}">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="">Username</label>
+                            <input type="" class="form-control" name="sign_username">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" name="password1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Confirm Password</label>
+                            <input type="password" class="form-control" name="password2">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <br>
+                        {% if error %}
+                            {{ error }}
+                            <br/>
+                            <br/>
+                        {% endif %}
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container text-center">
+        <h6 class="text_color">© Ashkan Ganj {% now "Y" %}</h6>
+    </div>
+</footer>
+</body>

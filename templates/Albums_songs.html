@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="content pt-5">
+        <div class="container">
+            <div class="row">
+                {% for song in Musics %}
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="p-2">
+                            <a data-target="#A{{ song.id }}" data-toggle="modal" href="#A{{ song.id }}">
+                                <img alt="" class="img-thumbnail rounded-circle" src="{{ song.image.url }}"/>
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="A{{ song.id }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="application">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 style="font-weight: bolder;  color:blueviolet;"
+                                                class="modal-title">{{ song.song_title }}</h5>
+                                        </div>
+                                        <div class="container">
+                                            <img alt="" class="img-fluid rounded-circle" src="{{ song.image.url }}"/>
+                                        </div>
+                                        <div class="modal-body">
+                                            <audio controls style="width: 100%">
+                                                <source src="{{ song.song.url }}" type="audio/ogg">
+                                            </audio>
+                                        </div>
+                                        <div class="container">
+                                            {% for music in songs.all %}
+                                                {% if music.artist == song.artist and music.song_title != song.song_title %}
+                                                    <div class="row">
+                                                        <div class="py-2 col-2">
+                                                            <img class="avatar" src="{{ song.image.url }}"
+                                                                 alt="avatar"/>
+                                                        </div>
+                                                        <div class="pt-2 col-10">
+                                                            <h5 style="font-weight: bolder;color:blueviolet;">{{ music.song_title }}</h5>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <audio controls style="width: 100%">
+                                                                <source src="{{ music.song.url }}" type="audio/ogg">
+                                                            </audio>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="text-center" style="font-weight:bolder; color: white">{{ song.song_title }}</h6>
+                            <br>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

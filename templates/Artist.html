@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="row ">
+        {% for Artist in Artists.all %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="p-2 ">
+                    <a href="{% url 'ArtistSongs' Artist.name %}"><img style="height: 200px" alt=""
+                                                                       src="{{ Artist.image.url }}"
+                                                                       class="img-thumbnail rounded-circle "></a>
+                </div>
+                <div class="card-body text-center">
+                    <h6 style="color: white; font-weight: bolder;"
+                        class="card-title" style="font-weight: bolder;">{{ Artist.name }}</h6>
+                    <br>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

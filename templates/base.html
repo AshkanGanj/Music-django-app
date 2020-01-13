@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'music-player.png' %}">
+    <script src="https://kit.fontawesome.com/1f06ccc41e.js" crossorigin="anonymous"></script>
+    {% block head %}
+
+
+    {% endblock %}
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #0E3752;
+        }
+
+        .song_nav a {
+            color: rgb(253, 61, 80);
+            padding: 8px;
+            font-weight: bold;
+
+        }
+
+        #footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            text-align: center;
+        }
+
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            background: rgb(160, 63, 251);
+            background: linear-gradient(63deg, rgba(160, 63, 251, 1) 0%, rgba(252, 70, 114, 1) 81%);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidebar a,
+        h5,
+        i {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            font-weight: bolder
+        }
+
+        .sidebar a:hover {
+            color: whitesmoke;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background: rgb(160, 63, 251);
+            background: linear-gradient(63deg, rgba(160, 63, 251, 1) 0%, rgba(252, 70, 114, 1) 81%);
+            color: white;
+            padding: 5px 10px;
+            border: none;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+
+        .inline-group:valid {
+            border: 2px solid rgb(253, 61, 80);
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+
+            .sidebar a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container ">
+        <header>
+            <div class="row">
+                <div class="col-md-6">
+                    <a style="color: rgb(253, 61, 80); font-weight: bolder;font-size: 40px;" href="{% url 'Home' %}"
+                        class="navbar-brand">Music</a>
+                </div>
+                <div class="col-md-6">
+                    <form action="" method="GET" class="form-group mt-3 my-lg-0 pt-3">
+                        <div class="input-group mt-1">
+                            <input name="search" type="text" class="form-control " placeholder="search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr style="background-color:rgb(253, 61, 80); color:rgb(253, 61, 80); ">
+            <div class="pt-1 song_nav">
+                <a href="{% url 'Home' %}">Songs</a>
+                <a href="{% url 'Albums' %}">Albums</a>
+                <a href="{% url 'Artist' %}">Artist</a>
+            </div>
+
+        </header>
+        <section>
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <i style="font-size: 60px;" class="fas fa-user-tie"></i>
+
+                {% if not user.is_authenticated %}
+                <h5>Username : Not login</h5>
+                {% else %}
+                <h5>{{ user.username }}</h5>
+                {% endif %}
+                <hr width="80%">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'SignUp' %}">Creat account</a>
+                <a href="{% url 'Login' %}">Login </a>
+                {% endif %}
+                {% if  user.is_authenticated %}
+                <a href="javascript:{document.getElementById('Logout').submit()}">LogOut</a>
+                <form id="Logout" method="POST" action="{% url 'Logout' %}">
+                    {% csrf_token %}
+                </form>
+                {% endif %}
+            </div>
+            <div id="main">
+                <button class="openbtn" onclick="openNav()">☰</button>
+                <div class="container-fluid">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <div class="container text-center">
+                <h6 class="text_color">© Ashkan Ganj {% now "Y" %}</h6>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "200px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
