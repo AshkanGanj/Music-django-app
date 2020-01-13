@@ -22,10 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l0lesqfes-th9re(+-yxn-zd#qhq&zy8eqz@03oskhw+b#(k1y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['ashmusic-ashkan79.fandogh.cloud']
-ALLOWED_HOSTS = ['https://musicash.herokuapp.com']
+# ALLOWED_HOSTS = ['https://musicash.herokuapp.com']
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,19 +79,8 @@ DATABASES = {
     }
 }
 import dj_database_url
-
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'music_app',
-#         'USER': 'root',
-#         'PASSWORD': '12345678',
-#         'HOST': 'database',
-#         'PORT': '3306',
-#     }
-# }
+db_from_env = dj_database_url.config()
+DATABASES['default'] = dj_database_url.update(db_from_env)
 
 
 # Password validation
