@@ -7,11 +7,11 @@
         {% for song in songs.all %}
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="p-2">
-                    <a data-target="#A{{ song.id }}" data-toggle="modal" href="#A{{ song.id }}">
+                    <a data-target="#s{{ song.id }}" data-toggle="modal" href="#s{{ song.id }}">
                         <img alt="" class="img-thumbnail rounded-circle" src="{{ song.image.url }}"/>
                     </a>
                     <!-- Modal -->
-                    <div class="modal fade" id="A{{ song.id }}" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="s{{ song.id }}" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="application">
                             <div class="modal-content">
@@ -23,7 +23,7 @@
                                     <img alt="" class="img-fluid rounded-circle" src="{{ song.image.url }}"/>
                                 </div>
                                 <div class="modal-body">
-                                    <audio controls style="width: 100%">
+                                    <audio preload="none" controls style="width: 100%">
                                         <source src="{{ song.song.url }}" type="audio/ogg">
                                     </audio>
                                 </div>
@@ -39,7 +39,7 @@
                                                 </div>
 
                                                 <div class="col-12">
-                                                    <audio controls style="width: 100%">
+                                                    <audio preload="none" controls style="width: 100%" >
                                                         <source src="{{ music.song.url }}" type="audio/ogg">
                                                     </audio>
                                                 </div>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h6 class="text-center" style="font-weight:bolder; color: white">{{ song.song_title }}</h6>
+                    <h6 class="text-center" style="font-weight:bolder; color: black">{{ song.song_title }}</h6>
                     <br>
                 </div>
             </div>

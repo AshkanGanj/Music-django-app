@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,10 +22,8 @@ SECRET_KEY = 'l0lesqfes-th9re(+-yxn-zd#qhq&zy8eqz@03oskhw+b#(k1y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-# ALLOWED_HOSTS = ['ashmusic-ashkan79.fandogh.cloud']
-# ALLOWED_HOSTS = ['https://musicash.herokuapp.com']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ashkmusic-ashkan79.fandogh.cloud']
+# ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,11 +75,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.music_sys'),
     }
 }
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -126,4 +118,3 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-django_heroku.settings(locals())

@@ -26,7 +26,7 @@
                                             <img alt="" class="img-fluid rounded-circle" src="{{ song.image.url }}"/>
                                         </div>
                                         <div class="modal-body">
-                                            <audio controls style="width: 100%">
+                                            <audio preload="none" controls style="width: 100%">
                                                 <source src="{{ song.song.url }}" type="audio/ogg">
                                             </audio>
                                         </div>
@@ -43,7 +43,7 @@
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <audio controls style="width: 100%">
+                                                            <audio preload="none" controls style="width: 100%">
                                                                 <source src="{{ music.song.url }}" type="audio/ogg">
                                                             </audio>
                                                         </div>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="text-center" style="font-weight:bolder; color: white">{{ song.song_title }}</h6>
+                            <h6 class="text-center" style="font-weight:bolder; color: black">{{ song.song_title }}</h6>
                             <br>
                         </div>
                     </div>
