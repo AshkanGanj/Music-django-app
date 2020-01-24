@@ -6,11 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Music Player</title>
+    <title>Ashk Music</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="icon" href="{% static 'music-player.png' %}">
-    <script src="https://kit.fontawesome.com/1f06ccc41e.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/1f06ccc41e.js" crossorigin="anonymous"></script> -->
     {% block head %}
 
 
@@ -21,9 +21,9 @@
         body {
             height: 100%;
         }
-        body{
-            background: rgb(34, 34, 100);
-        }
+        /* body{
+            background: rgb(49, 49, 110);
+        } */
 
         .song_nav a {
             color: rgb(253, 61, 80);
@@ -127,7 +127,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <a style="color: rgb(253, 61, 80); font-weight: bolder;font-size: 40px;" href="{% url 'Home' %}"
-                        class="navbar-brand">Music</a>
+                        class="navbar-brand">Ashk Music</a>
                 </div>
                 <div class="col-md-6">
                     <form action="" method="GET" class="form-group mt-3 my-lg-0 pt-3">
@@ -178,7 +178,7 @@
 
         <footer id="footer">
             <div class="container text-center">
-                <h6 class="text_color">© Ashkan Ganj {% now "Y" %}</h6>
+                <h6 style="font-weight: bold; color:rgb(253, 61, 80); color:rgb(253, 61, 80);" class="text_color">© Ashkan Ganj {% now "Y" %}</h6>
             </div>
         </footer>
     </div>
