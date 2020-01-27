@@ -1,0 +1,83 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/dist/css/bootstrap.min.css' %}">
+    <title>Search</title>
+</head>
+<style>
+    body {
+        background-image:url("{% static 'search-back.jpg' %}");
+    }
+</style>
+
+<body>
+    <section class="container">
+        {% for song in songs.all %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="p-2">
+                <a data-target="#s{{ song.id }}" data-toggle="modal" href="#s{{ song.id }}">
+                    <img alt="" class="img-thumbnail rounded-circle" src="{{ song.image.url }}" />
+                </a>
+                <!-- Modal -->
+                <div class="modal fade" id="s{{ song.id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="application">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 style="font-weight: bolder;  color:blueviolet;" class="modal-title">
+                                    {{ song.song_title }}</h5>
+                            </div>
+                            <div class="container">
+                                <img alt="" class="img-fluid rounded-circle" src="{{ song.image.url }}" />
+                            </div>
+                            <div class="modal-body">
+                                <audio preload="none" controls style="width: 100%">
+                                    <source src="{{ song.song.url }}" type="audio/ogg">
+                                </audio>
+                            </div>
+                            <div class="container">
+                                {% for music in songs.all %}
+                                {% if music.artist == song.artist and music.song_title != song.song_title %}
+                                <div class="row">
+                                    <div class="py-2 col-2">
+                                        <img class="avatar" src="{{ song.image.url }}" alt="avatar" />
+                                    </div>
+                                    <div class="pt-2 col-10">
+                                        <h5 style="font-weight: bolder;color:blueviolet;">{{ music.song_title }}</h5>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <audio preload="none" controls style="width: 100%">
+                                            <source src="{{ music.song.url }}" type="audio/ogg">
+                                        </audio>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="text-center" style="font-weight:bolder; color: black">{{ song.song_title }}</h6>
+                <br>
+            </div>
+        </div>
+
+        {% endfor %}
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'assets/bootstrap/dist/js/bootstrap.min.js' %}"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -10,4 +10,6 @@ urlpatterns = [
     path('Artist/', views.Artists, name='Artist'),
     path('Artist_songs/<name>/', views.Artist_songs, name='ArtistSongs'),
     path('profile/', views.ChangePhoto, name='ChangePhoto'),
+    path('search/', views.Search, name='Search'),
+    
 ]

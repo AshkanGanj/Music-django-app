@@ -6,6 +6,27 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 
 
+def Search(request):
+    songs = Song.objects
+
+    query = request.GET.get("search")
+
+    if query is not None:
+        songs = songs.filter(song__icontains=query)
+        if songs:
+            return render(request, 'Home.html', {'songs': songs})
+        elif songs:
+            songs = songs.filter(artist__name__icontains=query)
+            return render(request, 'Home.html', {'songs': songs})        
+        elif songs:
+            songs = songs.filter(album__album_title=query)
+            return render(request, 'Home.html', {'songs': songs})
+        else:
+            return redirect('Home')
+    else:
+        return redirect('Home')
+
+
 def SignUp(request):
     if request.method == 'POST':
         if request.POST["password1"] == request.POST["password2"]:
@@ -45,7 +66,7 @@ def Logout(request):
 def ChangePhoto(request):
     if request.method == 'POST':
         userpr = UserProfile()
-        userpr.image = request.FILES['image']             
+        userpr.image = request.FILES['image']
         userpr.save()
         return render(request, 'Home.html')
     else:
@@ -64,16 +85,7 @@ def Albums_songs(request, name):
 
 def Song_player(request):
     songs = Song.objects
-    artists=Artist.objects
-    query = request.GET.get("search")
-    if query:
-        songs = songs.filter(song__icontains=query)
-        if songs:
-            return render(request, 'Home.html', {'songs': songs})
-        else:
-            artists = artists.filter(name__icontains=query)
-            return render(request, 'Home.html', {'songs': artists})
-
+    artists = Artist.objects
     return render(request, 'Home.html', {'songs': songs})
 
 
