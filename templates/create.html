@@ -1,7 +1,63 @@
+{% load static %}
+<html lang="en">
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {{ context }}
-    <input type="submit" value="Save" />
-</form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'music-player.png' %}">
+    <title>Edit profile</title>
+    <style>
+        body {
+            background: rgb(160, 63, 251);
+            background: linear-gradient(63deg, rgba(160, 63, 251, 1) 0%, rgba(252, 70, 114, 1) 81%);
+        }
+
+       .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<div class="container">
+    <div class="card  m-5" style="max-width: 640px;">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Edit profile</h5>
+       
+                    <form class="form-group" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table>
+                            <tr>{{ user_form.as_table }}</tr>
+                            <tr>{{ profile_form.as_table }}</tr>
+                        </table>
+                        <button class="btn btn-outline-danger" type="submit">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    <div class="container text-center">
+        <h6 class="text_color">© Ashkan Ganj {% now "Y" %}</h6>
+    </div>
+</footer>
+</body>
+
+</html>

@@ -172,7 +172,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <img class="img-thumbnail rounded-circle" width="200px" height="200px"
-                                        alt="Responsive image" src="{{ user.profile.image.url }}">
+                                            alt="Responsive image" src="{{ user.profile.image.url }}">
                                     </div>
                                     <div class="col-6">
                                         <ul style="font-weight: bold;list-style-type:none;">
@@ -186,16 +186,10 @@
                                         </ul>
                                     </div>
                                 </div>
-                                
-                                <div class="modal-footer">
-                                    <form class="form-group" method="post">
-                                        {% csrf_token %}
-                                        {{ user_form.as_p }}
-                                        {{ profile_form.as_p }}
-                                        <button class="btn btn-outline-danger" type="submit">Save changes</button>
-                                    </form>
-                                </div>
-
+                            </div>
+                            <div class="modal-footer text-center">
+                                <a style="color: red;" href="{% url 'Edit' %}">Edit profile</a>
+                                <br>
                             </div>
                         </div>
                     </div>

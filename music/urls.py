@@ -9,8 +9,7 @@ urlpatterns = [
     path('Albums_songs/<name>/', views.Albums_songs, name='AlbumsSongs'),
     path('Artist/', views.Artists, name='Artist'),
     path('Artist_songs/<name>/', views.Artist_songs, name='ArtistSongs'),
-    path('profile/', views.Profile, name='Profile'),
     path('search/', views.Search, name='Search'),
-    path('create/',views.Profile,name='Create')
-    
+    path('edit/', views.update_profile, name='Edit')
+
 ]
