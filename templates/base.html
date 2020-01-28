@@ -21,9 +21,6 @@
         body {
             height: 100%;
         }
-        /* body{
-            background: rgb(49, 49, 110);
-        } */
 
         .song_nav a {
             color: rgb(253, 61, 80);
@@ -89,15 +86,15 @@
         .openbtn {
             font-size: 20px;
             cursor: pointer;
-            background: rgb(160, 63, 251);
-            background: linear-gradient(63deg, rgba(160, 63, 251, 1) 0%, rgba(252, 70, 114, 1) 81%);
-            color: white;
+            background: white;
+            color: black;
             padding: 5px 10px;
             border: none;
+            border-radius: 50%;
         }
 
         .openbtn:hover {
-            background-color: #444;
+            background: rgba(252, 70, 114, 1);
         }
 
         .inline-group:valid {
@@ -147,14 +144,65 @@
         </header>
         <section>
             <div id="mySidebar" class="sidebar">
+
+
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-                <i style="font-size: 60px;" class="fas fa-user-tie"></i>
 
                 {% if not user.is_authenticated %}
                 <h5>Username : Not login</h5>
                 {% else %}
+                <div class="container">
+                    <img class="img-thumbnail rounded-circle" width="150px" height="150px" alt="Responsive image"
+                        src="{{ user.profile.image.url }}">
+                </div>
+                <br>
                 <h5>{{ user.username }}</h5>
+                <!-- user profile -->
+                <a data-target="#user{{ user.id }}" data-toggle="modal" href="#user{{ user.id }}">profile</a>
+                <!-- Modal -->
+                <div class="modal fade" id="user{{ user.id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="application">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 style="font-weight: bolder;  color:blueviolet;" class="modal-title">
+                                    {{ user.get_full_name }}</h2>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <img class="img-thumbnail rounded-circle" width="200px" height="200px"
+                                        alt="Responsive image" src="{{ user.profile.image.url }}">
+                                    </div>
+                                    <div class="col-6">
+                                        <ul style="font-weight: bold;list-style-type:none;">
+                                            <br>
+                                            <li>Username: {{ user.username }}</li>
+                                            <br>
+                                            <li>Location: {{ user.profile.location }}</li>
+                                            <br>
+                                            <li>Birth Date: {{ user.profile.birth_date }}</li>
+                                            <br>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <form class="form-group" method="post">
+                                        {% csrf_token %}
+                                        {{ user_form.as_p }}
+                                        {{ profile_form.as_p }}
+                                        <button class="btn btn-outline-danger" type="submit">Save changes</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
                 {% endif %}
+
                 <hr width="80%">
                 {% if not user.is_authenticated %}
                 <a href="{% url 'SignUp' %}">Creat account</a>
@@ -178,7 +226,8 @@
 
         <footer id="footer">
             <div class="container text-center">
-                <h6 style="font-weight: bold; color:rgb(253, 61, 80); color:rgb(253, 61, 80);" class="text_color">© Ashkan Ganj {% now "Y" %}</h6>
+                <h6 style="font-weight: bold; color:rgb(253, 61, 80); color:rgb(253, 61, 80);" class="text_color">©
+                    Ashkan Ganj {% now "Y" %}</h6>
             </div>
         </footer>
     </div>

@@ -1,23 +1,49 @@
 from django.shortcuts import render, redirect
-from .models import Song, Album, Artist, UserProfile
+from .models import Song, Album, Artist, Profile
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
+from .forms import ProfileForm, UserForm
+from django.db import transaction
+
+
+@login_required
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        #     user_form = UserForm(request.POST, instance=request.user)
+        #     profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        #     if user_form.is_valid() and profile_form.is_valid():
+        #         user_form.save()
+        #         profile_form.save()
+        #         # messages.success(request, _(
+        #         #     'Your profile was successfully updated!'))
+        #         # return redirect('settings:profile')
+        #     # else:
+        #     #     messages.error(request, _('Please correct the error below.'))
+        # # else:
+        # #     user_form = UserForm(instance=request.user)
+        # #     profile_form = ProfileForm(instance=request.user.profile)
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+        return render(request, 'base.html', {'user_form': user_form})
 
 
 def Search(request):
     songs = Song.objects
-
     query = request.GET.get("search")
-
     if query is not None:
         songs = songs.filter(song__icontains=query)
         if songs:
             return render(request, 'Home.html', {'songs': songs})
         elif songs:
             songs = songs.filter(artist__name__icontains=query)
-            return render(request, 'Home.html', {'songs': songs})        
+            return render(request, 'Home.html', {'songs': songs})
         elif songs:
             songs = songs.filter(album__album_title=query)
             return render(request, 'Home.html', {'songs': songs})
@@ -60,17 +86,6 @@ def Logout(request):
         auth.logout(request)
         return redirect('Home')
     return render(request, 'Home.html')
-
-
-@login_required
-def ChangePhoto(request):
-    if request.method == 'POST':
-        userpr = UserProfile()
-        userpr.image = request.FILES['image']
-        userpr.save()
-        return render(request, 'Home.html')
-    else:
-        return render(request, 'Home.html')
 
 
 def Albums(request):
