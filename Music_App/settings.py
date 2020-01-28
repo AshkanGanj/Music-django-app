@@ -4,8 +4,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l0lesqfes-th9re(+-yxn-zd#qhq&zy8eqz@03oskhw+b#(k1y'
 DEBUG = True
-# ALLOWED_HOSTS = ['ashkmusic-ashkan79.fandogh.cloud']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ashkmusic-ashkan79.fandogh.cloud']
+# ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'music.apps.MusicConfig',
