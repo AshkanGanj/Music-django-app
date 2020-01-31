@@ -1,5 +1,0 @@
-Django
-Pillow
-python-postmark
-requests
-django-cors-middleware
