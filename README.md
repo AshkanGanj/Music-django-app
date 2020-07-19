@@ -8,7 +8,3 @@ requirement {
 2.django 3.0.2  ----> pip install djanog==3.0.2
 
 3.pillow 7.0.0 -----> pip install pillow==7.0.0
-
-Live Example
-
-https://ashkmusic-ashkan79.fandogh.cloud/
